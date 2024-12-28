@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Site</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("{{ url_for('static', filename='Images/login.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            animation: slideDown 0.7s ease-out;
+        }
+
+        .button-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            animation: buttonFadeIn 1s ease-out;
+        }
+
+        .model-button {
+            padding: 100px 30px;
+            font-size: 18px;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 200px;
+            height: 150px;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .model-button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        .model-button:active {
+            transform: scale(0.98);
+        }
+
+        .model-button.safety {
+            background-image: url("{{ url_for('static', filename='Images/Helmet.jpg') }}");
+        }
+
+        .model-button.helmet {
+            background-image: url("{{ url_for('static', filename='Images/mask.jpg') }}");
+        }
+
+        .model-button.fire {
+            background-image: url("{{ url_for('static', filename='Images/fire.jpg') }}");
+        }
+
+        .logout {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #ad2121;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout:hover {
+            background-color: #9e1d1d;
+            transform: scale(1.05);
+        }
+
+        /* Fade In Effect */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Slide Down Effect */
+        @keyframes slideDown {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Button Fade In Effect */
+        @keyframes buttonFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .model-button {
+                width: 150px;
+                font-size: 16px;
+                height: 130px;
+            }
+
+            .logout {
+                bottom: 10px;
+                left: 10px;
+                padding: 8px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Select A Task</h1>
+    <div class="button-container">
+        <form action="/selection" method="POST">
+            <button class="model-button safety" type="submit" name="model" value="safety">
+                Safety Detection
+            </button>
+        </form>
+        <form action="/selection" method="POST">
+            <button class="model-button helmet" type="submit" name="model" value="facemask">
+                Face Mask Detection
+            </button>
+        </form>
+        <form action="/selection" method="POST">
+            <button class="model-button fire" type="submit" name="model" value="fire">
+                Fire Detection
+            </button>
+        </form>
+    </div>
+
+    <!-- Logout Button -->
+    <button class="logout" onclick="logout()">Logout</button>
+
+    <script>
+        // Function to generate random RGB color
+        function getRandomRGB() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Add event listeners for hover to change box-shadow color
+        const modelButtons = document.querySelectorAll('.model-button');
+
+        modelButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                const randomColor = getRandomRGB();
+                button.style.boxShadow = `0 0 20px ${randomColor}`;
+            });
+
+            button.addEventListener('mouseleave', () => {
+                button.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+            });
+        });
+
+        function logout() {
+            fetch('/logout', { method: 'GET' })
+                .then(() => window.location.href = '/');
+        }
+    </script>
+</body>
+</html>
