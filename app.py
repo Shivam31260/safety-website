@@ -66,7 +66,7 @@ def reset_model():
     return '', 204  # No content response
 
 # Set up a directory for saving captured frames
-CAPTURED_FRAMES_DIR = r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\captured_frames'
+CAPTURED_FRAMES_DIR = r'captured_frames'
 
 def gen():
     """Generate live video feed with object detection."""
@@ -104,7 +104,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\static\Images\ALERT.mp3')  # Path to your MP3 file
+                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -118,7 +118,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\static\Images\ALERT.mp3')  # Path to your MP3 file
+                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -132,7 +132,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\static\Images\ALERT.mp3')  # Path to your MP3 file
+                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
