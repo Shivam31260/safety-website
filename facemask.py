@@ -1,7 +1,7 @@
 import torch
 
 # Path to YOLOv5 model weights
-MODEL_PATH = r"C:\Users\DELL\Desktop\FInal Project\DetectionSystem\best.pt files\facemask.pt"
+MODEL_PATH = r"best.pt files\facemask.pt"
 
 def facemask_model(conf_threshold=0.6, iou_threshold=0.45):
     """
