@@ -1,7 +1,9 @@
 import torch
-
+import os
 # Path to YOLOv5 model weights
-MODEL_PATH = r"best.pt files\firedetection.pt"
+# MODEL_PATH = r"best.pt files\firedetection.pt"
+MODEL_PATH = os.path.join('best.pt files', 'firedetection.pt')
+
 
 def loadfiredetection_model(conf_threshold=0.6, iou_threshold=0.45):
     """

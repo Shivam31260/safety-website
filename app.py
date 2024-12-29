@@ -104,7 +104,8 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
+                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
+                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -118,7 +119,8 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
+                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
+                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -132,7 +134,8 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
+                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 
+                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
