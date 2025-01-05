@@ -1,8 +1,8 @@
 import torch
-import os
+
 # Path to YOLOv5 model weights
-# MODEL_PATH = r"best.pt files\helmet_head.pt"
-MODEL_PATH = os.path.join('best.pt files', 'helmet_head.pt')
+MODEL_PATH = r"C:\Users\DELL\Desktop\FInal Project\safety-website\best.pt files\helmet_head.pt"
+
 def load_model(conf_threshold=0.6, iou_threshold=0.45):
     """
     Loads the YOLOv5 model with the specified settings.

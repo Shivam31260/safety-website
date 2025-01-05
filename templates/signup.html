@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safety Site</title>
+    <title>Sign Up</title>
     <link rel="icon" href="static/a.png" type="image/x-icon">
     <style>
         body {
@@ -17,9 +17,9 @@
             background-position: center;
             background-attachment: fixed;
             color: #fff;
-            display: flex; /* Ensures flexbox layout */
-            justify-content: center; /* Horizontally center the form */
-            align-items: center; /* Vertically center the form */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -76,7 +76,12 @@
             background-color: #0056b3;
         }
 
-        .signup-link {
+        p.error {
+            color: red;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .login-link {
             margin-top: 10px;
             width:30%;
             display: inline-block;
@@ -89,14 +94,8 @@
             transition: background-color 0.3s ease;
         }
 
-        .signup-link:hover {
+        .login-link:hover {
             background-color: #218838;
-        }
-
-        p.error {
-            color: red;
-            font-weight: bold;
-            margin-top: 20px;
         }
 
         @media screen and (max-width: 600px) {
@@ -116,30 +115,23 @@
             button {
                 font-size: 1rem;
             }
-
-            .signup-link {
-                font-size: 1rem;
-                padding: 8px 15px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Protection is the Key Concern</h1>
-        <form action="/login" method="POST" class="login-form">
-            <label for="username">User ID:</label>
+        <h1>Create A New Account</h1>
+        <form action="/signup" method="POST">
+            <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit">Log In</button>
-            <a href="/signup" class="signup-link">Sign Up</a>
+            <button type="submit">Sign Up</button>
+            <a href="{{ url_for('login') }}" class="login-link">Back to Login</a>
         </form>
         {% if error %}
             <p class="error">{{ error }}</p>
         {% endif %}
-        <!-- Add Sign-Up Button -->
-        
     </div>
 </body>
 </html>

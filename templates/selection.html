@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Safety Site</title>
+    <link rel="icon" href="static/a.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,7 +12,7 @@
             margin: 0;
             padding: 0;
             height: 100vh;
-            background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("{{ url_for('static', filename='Images/login.jpg') }}");
+            background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("{{ url_for('static', filename='login.jpg') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -68,15 +69,15 @@
         }
 
         .model-button.safety {
-            background-image: url("{{ url_for('static', filename='Images/Helmet.jpg') }}");
+            background-image: url("{{ url_for('static', filename='Helmet.jpg') }}");
         }
 
         .model-button.helmet {
-            background-image: url("{{ url_for('static', filename='Images/mask.jpg') }}");
+            background-image: url("{{ url_for('static', filename='mask.jpg') }}");
         }
 
         .model-button.fire {
-            background-image: url("{{ url_for('static', filename='Images/fire.jpg') }}");
+            background-image: url("{{ url_for('static', filename='fire.jpg') }}");
         }
 
         .logout {

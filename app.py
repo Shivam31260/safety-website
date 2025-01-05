@@ -11,7 +11,8 @@ from werkzeug.utils import secure_filename
 import pygame  # Import pygame for MP3 playback
 from datetime import datetime
 import time
-
+import bcrypt  # For password hashing
+import sqlite3
 # Import model loaders
 from helmet_head import load_model as load_helmet_head_model
 from facemask import facemask_model as load_facemask_model
@@ -23,13 +24,7 @@ pathlib.PosixPath = pathlib.WindowsPath
 app = Flask(__name__)
 app.secret_key = 'Shivam31260'
 
-# Dummy credentials for login
-credentials = {
-    "admin": "Shivam",
-    "user1": "31260"
-}
-
-# Global variables
+   
 model = None
 is_live_feed_active = False
 
@@ -66,7 +61,7 @@ def reset_model():
     return '', 204  # No content response
 
 # Set up a directory for saving captured frames
-CAPTURED_FRAMES_DIR = r'captured_frames'
+CAPTURED_FRAMES_DIR = r'C:\Users\DELL\Desktop\FInal Project\safety-website\captured_frames'
 
 def gen():
     """Generate live video feed with object detection."""
@@ -104,8 +99,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
-                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
+                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\safety-website\static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -119,8 +113,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 file
-                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
+                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -134,8 +127,7 @@ def gen():
                     print(f"Class detected: {class_name}")
 
                     # Play the alert sound
-                    # pygame.mixer.music.load(r'static\ALERT.mp3')  # Path to your MP3 
-                    pygame.mixer.music.load(os.path.join('static', 'ALERT.mp3'))
+                    pygame.mixer.music.load(r'C:\Users\DELL\Desktop\FInal Project\DetectionSystem\static\ALERT.mp3')  # Path to your MP3 file
                     pygame.mixer.music.play()
 
                     # Save the current frame with timestamp
@@ -144,7 +136,6 @@ def gen():
                     img_BGR = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)  # Convert RGB to BGR for OpenCV
                     cv2.imwrite(save_path, img_BGR)  # Save the image
                     print(f"Captured and saved frame: {save_path}")
-
 
             img_BGR = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)  # Convert RGB to BGR for OpenCV
             ret, buffer = cv2.imencode('.jpg', img_BGR)  # Encode the frame to JPEG
@@ -156,6 +147,7 @@ def gen():
             break
     cap.release()
 
+
 @app.route('/')
 def login():
     """Display the login page."""
@@ -165,12 +157,37 @@ def login():
 def handle_login():
     """Handle login form submission."""
     username = request.form['username']
-    password = request.form['password']
-    if username in credentials and credentials[username] == password:
+    password = request.form['password'].encode('utf-8')
+    
+    with sqlite3.connect("users.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute("SELECT password FROM users WHERE username = ?", (username,))
+        row = cursor.fetchone()
+    
+    if row and bcrypt.checkpw(password, row[0]):
         session['username'] = username
         return redirect(url_for('selection'))
     else:
         return render_template('login.html', error="Invalid credentials. Please try again.")
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    """Sign-Up Page"""
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password'].encode('utf-8')
+        hashed_password = bcrypt.hashpw(password, bcrypt.gensalt())
+        
+        try:
+            with sqlite3.connect("users.db") as conn:
+                cursor = conn.cursor()
+                cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, hashed_password))
+                conn.commit()
+                return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            return render_template('signup.html', error="Username already exists. Please choose another.")
+    
+    return render_template('signup.html')
 
 @app.route('/selection', methods=['GET', 'POST'])
 def selection():
@@ -213,7 +230,6 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('login'))
 
-
 @app.route('/detect_image', methods=['POST'])
 def detect_image():
     if 'image' not in request.files:
@@ -238,7 +254,6 @@ def detect_image():
         return Response(img_bytes, mimetype='image/jpeg')
     
     return "Invalid file type", 400
-
 
 if __name__ == "__main__":
     # Run the Flask app
