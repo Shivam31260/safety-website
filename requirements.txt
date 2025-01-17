@@ -1,9 +1,9 @@
 Flask==2.3.2
-torch>=1.9.0  # Adjust version based on your local setup
+torch>=1.9.0
 opencv-python-headless==4.8.0.74
-numpy==1.24.4
+numpy>=1.21.2
 Pillow==10.0.0
 pygame==2.4.0
 bcrypt==4.0.1
-sqlite3==3.38.5
 Werkzeug==2.3.2
+gunicorn==20.1.0  # Optional: for production WSGI server
