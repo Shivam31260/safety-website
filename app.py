@@ -122,12 +122,9 @@ def handle_login():
 
     if row and bcrypt.checkpw(password, row[0]):
         session['username'] = username
-        print(f"User {username} logged in successfully")
         return redirect(url_for('selection'))
     else:
-        print(f"Failed login attempt for user {username}")
         return render_template('login.html', error="Invalid credentials. Please try again.")
-
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
