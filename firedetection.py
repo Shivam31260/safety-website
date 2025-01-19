@@ -3,7 +3,7 @@ import os
 
 # Path to YOLOv5 model weights for fire detection
 # Use an environment variable or a relative path for Render compatibility
-MODEL_PATH = os.getenv('FIRE_DETECTION_MODEL_PATH', './models/firedetection.pt')
+MODEL_PATH = os.getenv('FIRE_DETECTION_MODEL_PATH', './static/best.pt files/firedetection.pt')
 
 def fire_detection_model(conf_threshold=0.6, iou_threshold=0.45):
     """

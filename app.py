@@ -12,9 +12,9 @@ import sqlite3
 from werkzeug.utils import secure_filename
 
 # Import model loaders
-from helmet_head import helmet_head_model as load_helmet_head_model
+from helmet_head import load_model as load_helmet_head_model
 from facemask import facemask_model as load_facemask_model
-from firedetection import fire_detection_model as load_fire_detection_model
+from firedetection import loadfiredetection_model as load_fire_detection_model
 
 app = Flask(__name__)
 app.secret_key = 'Shivam31260'

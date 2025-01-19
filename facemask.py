@@ -3,7 +3,7 @@ import os
 
 # Path to YOLOv5 model weights for facemask detection
 # Use an environment variable or a relative path for Render compatibility
-MODEL_PATH = os.getenv('FACEMASK_MODEL_PATH', './models/facemask.pt')
+MODEL_PATH = os.getenv('FACEMASK_MODEL_PATH', './static/best.pt files/facemask.pt')
 
 def facemask_model(conf_threshold=0.6, iou_threshold=0.45):
     """

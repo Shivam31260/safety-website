@@ -3,7 +3,7 @@ import os
 
 # Path to YOLOv5 model weights for helmet and head detection
 # Use an environment variable or a relative path for compatibility
-MODEL_PATH = os.getenv('HELMET_HEAD_MODEL_PATH', './models/helmet_head.pt')
+MODEL_PATH = os.getenv('HELMET_HEAD_MODEL_PATH', './static/best.pt files/helmet_head.pt')
 
 def helmet_head_model(conf_threshold=0.6, iou_threshold=0.45):
     """
