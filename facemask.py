@@ -18,7 +18,7 @@ def facemask_model(conf_threshold=0.6, iou_threshold=0.45):
             raise FileNotFoundError(f"Model file not found at {MODEL_PATH}")
 
         # Load the YOLOv5 model from ultralytics hub with the custom weights
-        model = torch.hub.load('ultralytics/yolov5', 'custom', path=MODEL_PATH, force_reload=True)
+        model = torch.hub.load('./yolov5', 'custom', path=MODEL_PATH, force_reload=True)
         model.eval()  # Set model to evaluation mode
         model.conf = conf_threshold  # Set confidence threshold
         model.iou = iou_threshold    # Set IoU threshold
