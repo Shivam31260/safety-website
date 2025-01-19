@@ -35,7 +35,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(CAPTURED_FRAMES_DIR, exist_ok=True)
 
 # Initialize Pygame mixer for MP3 playback
-pygame.mixer.init()
+# pygame.mixer.init()
 
 def allowed_file(filename):
     """Check if the uploaded file is a valid image type."""
