@@ -87,8 +87,8 @@ def gen():
         for label in detected_labels:
             class_name = detected_classes[label]
             if class_name in ['head', 'without_mask', 'Fire']:
-                pygame.mixer.music.load(os.path.join(STATIC_FOLDER, 'ALERT.mp3'))
-                pygame.mixer.music.play()
+                # pygame.mixer.music.load(os.path.join(STATIC_FOLDER, 'ALERT.mp3'))
+                # pygame.mixer.music.play()
 
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 save_path = os.path.join(CAPTURED_FRAMES_DIR, f"detected_{class_name}_{timestamp}.jpg")
