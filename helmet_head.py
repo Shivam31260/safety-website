@@ -1,8 +1,8 @@
 import torch
 import os
-
-# Use an environment variable or a relative path for compatibility
-MODEL_PATH = os.getenv('HELMET_HEAD_MODEL_PATH', './static/best_pt_files/helmet_head.pt')
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+MODEL_PATH = os.path.join(STATIC_FOLDER, 'helmet_head.pt')
 
 def helmet_head_model(conf_threshold=0.6, iou_threshold=0.45):
     """

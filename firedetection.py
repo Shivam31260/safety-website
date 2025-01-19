@@ -1,10 +1,8 @@
 import torch
 import os
-
-# Path to YOLOv5 model weights for fire detection
-# Use an environment variable or a relative path for Render compatibility
-MODEL_PATH = os.getenv('FIRE_DETECTION_MODEL_PATH', './static/best.pt files/firedetection.pt')
-
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+STATIC_FOLDER = os.path.join(BASE_DIR, 'static')
+MODEL_PATH = os.path.join(STATIC_FOLDER, 'firedetection.pt')
 def fire_detection_model(conf_threshold=0.6, iou_threshold=0.45):
     """
     Load the YOLOv5 fire detection model with the specified settings.
