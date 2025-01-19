@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 import io
 import torch
-import pygame  # Import pygame for MP3 playback
+# import pygame  # Import pygame for MP3 playback
 from datetime import datetime
 import bcrypt  # For password hashing
 import sqlite3
