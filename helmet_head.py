@@ -10,7 +10,7 @@ ogmodel = os.path.join(STATIC_FOLDER, 'yolov5')
 # Global variable to cache the loaded model
 _cached_model = None
 
-def facemask_model(conf_threshold=0.6, iou_threshold=0.45):
+def helmet_head_model(conf_threshold=0.6, iou_threshold=0.45):
     """
     Returns the cached YOLOv5 model if already loaded, or loads it for the first time.
     """
