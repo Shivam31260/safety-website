@@ -10,6 +10,10 @@ from datetime import datetime
 import bcrypt  # For password hashing
 import sqlite3
 from werkzeug.utils import secure_filename
+import pygame
+from flaskwebgui import FlaskUI
+import webview
+import threading
 
 # Import model loaders
 from helmet_head import helmet_head_model as load_helmet_head_model
@@ -35,7 +39,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(CAPTURED_FRAMES_DIR, exist_ok=True)
 
 # Initialize Pygame mixer for MP3 playback
-# pygame.mixer.init()
+pygame.mixer.init()
 
 def allowed_file(filename):
     """Check if the uploaded file is a valid image type."""
@@ -87,8 +91,8 @@ def gen():
         for label in detected_labels:
             class_name = detected_classes[label]
             if class_name in ['head', 'without_mask', 'Fire']:
-                # pygame.mixer.music.load(os.path.join(STATIC_FOLDER, 'ALERT.mp3'))
-                # pygame.mixer.music.play()
+                pygame.mixer.music.load(os.path.join(STATIC_FOLDER, 'ALERT.mp3'))
+                pygame.mixer.music.play()
 
                 timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                 save_path = os.path.join(CAPTURED_FRAMES_DIR, f"detected_{class_name}_{timestamp}.jpg")
@@ -210,5 +214,11 @@ def detect_image():
 
     return "Invalid file type", 400
 
+
+def start_flask():
+    app.run(debug=False, host="127.0.0.1", port=5000)
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    # app.run(debug=False, host="0.0.0.0")
+    threading.Thread(target=start_flask, daemon=True).start()
+    webview.create_window("Safety App", "http://127.0.0.1:5000")
+    webview.start()
